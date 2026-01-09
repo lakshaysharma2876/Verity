@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema(
   {
@@ -48,19 +49,12 @@ const userSchema = new mongoose.Schema(
 
 //$algorithm(2digits)$counts$salt_hash 
 
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", async function () {
   if (!this.isModified("password")) {
-    return next();
+    return;
   }
   const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt, (err) => {
-    if(err) {
-        console.error("Error while hashing the password");
-        return;
-    }
-  });
-
-  next();
+  this.password = await bcrypt.hash(this.password, salt);
 });
 
 
@@ -69,7 +63,7 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 };
 
 //jwt authentication ==> header.payload.signature || separated by dot(.)
-userSchema.methods.generateToken = () => {
+userSchema.methods.generateToken = function () {
   return jwt.sign(
     { id: this._id },
     process.env.JWT_SECRET,
