@@ -15,10 +15,11 @@ const verificationSchema = new mongoose.Schema(
     },
 
     decision: {
-      type: String,
-      enum: ["approved", "rejected"],
-      required: true,
-    },
+  type: String,
+  enum: ["approved", "rejected"],
+  default: null,
+},
+
   },
   {
     timestamps: true,
