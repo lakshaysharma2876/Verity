@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { startMissedDayJob } from "./jobs/missedDayCheck.js";
+import { startMissedDayJob } from "./src/jobs/missedDayCheck.js";
 dotenv.config();
 
 import connectDB from "./src/config/db.js"
