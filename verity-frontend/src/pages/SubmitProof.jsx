@@ -43,6 +43,7 @@ const SubmitProof = () => {
       onSubmit={handleSubmit}
       loading={loading}
       dailyRequirement={commitment?.dailyRequirement}
+      commitment={commitment}
     />
   );
 };

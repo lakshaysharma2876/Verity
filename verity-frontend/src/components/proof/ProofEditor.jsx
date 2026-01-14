@@ -1,10 +1,10 @@
 import { useState } from "react";
-import SubmitProof from "../../pages/SubmitProof";
 
 const ProofEditor = ({
   onSubmit,
   loading,
   dailyRequirement,
+  commitment,
 }) => {
   const [text, setText] = useState("");
 
@@ -15,11 +15,15 @@ const ProofEditor = ({
         margin: "40px auto",
       }}
     >
-      <h2>Today’s Proof</h2>
+      <h2>Submit Proof for: {commitment?.title}</h2>
 
-      <p style={{ color: "#555", marginBottom: 16 }}>
-        Requirement: {SubmitProof?.dailyRequirement}
-      </p>
+      <div style={{ marginBottom: 24, padding: 16, backgroundColor: "#f9f9f9", borderRadius: 8 }}>
+        <h3 style={{ margin: "0 0 8px 0", color: "#333" }}>{commitment?.title}</h3>
+        <p style={{ margin: "0 0 12px 0", color: "#666" }}>{commitment?.description}</p>
+        <p style={{ margin: 0, color: "#555", fontWeight: "bold" }}>
+          Daily Requirement: {dailyRequirement}
+        </p>
+      </div>
 
       <textarea
         value={text}

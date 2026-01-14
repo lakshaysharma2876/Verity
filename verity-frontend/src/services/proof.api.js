@@ -16,3 +16,7 @@ export const submitProof = async ({
     }),
   });
 };
+
+export const fetchProofsForCommitment = ({commitmentId}) => {
+  return apiFetch(`/proofs?commitmentId=${commitmentId}`);
+};
