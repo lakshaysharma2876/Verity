@@ -4,8 +4,17 @@ import userRoutes from "./routes/userRoutes.js";
 import commitmentRoutes from "./routes/commitmentRoutes.js"
 import proofRoutes from "./routes/proofRoutes.js"
 import verificationRoutes from "./routes/verificationRoutes.js"
+import cors from "cors";
+
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 app.use(express.json());
 
