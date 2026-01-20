@@ -4,6 +4,9 @@ import dayjs from "dayjs";
 import ProofEditor from "../components/proof/ProofEditor";
 import ProofSubmittedState from "../components/proof/ProofSubmittedState";
 import { submitProof } from "../services/proof.api";
+import { motion, AnimatePresence } from "framer-motion";
+import { fadeIn } from "../styles/motion";
+
 
 const SubmitProof = () => {
   const location = useLocation();
@@ -39,12 +42,21 @@ const SubmitProof = () => {
   }
 
   return (
-    <ProofEditor
-      onSubmit={handleSubmit}
-      loading={loading}
-      dailyRequirement={commitment?.dailyRequirement}
-      commitment={commitment}
-    />
+    <AnimatePresence mode="wait">
+  {status === "submitted_pending" ? (
+    <motion.div key="submitted" {...fadeIn}>
+      <ProofSubmittedState />
+    </motion.div>
+  ) : (
+    <motion.div key="editor" {...fadeIn}>
+      <ProofEditor
+        onSubmit={handleSubmit}
+        loading={loading}
+        dailyRequirement={commitment.dailyRequirement}
+      />
+    </motion.div>
+  )}
+</AnimatePresence>
   );
 };
 

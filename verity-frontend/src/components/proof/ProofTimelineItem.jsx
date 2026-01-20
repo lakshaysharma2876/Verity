@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import ProofStatusBadge from "./ProofStatusBadge";
+import { motion } from "framer-motion";
 
 const ProofTimelineItem = ({ proof }) => {
   return (
@@ -16,11 +17,15 @@ const ProofTimelineItem = ({ proof }) => {
           marginBottom: 8,
         }}
       >
-        <strong>
-          {dayjs(proof.proofDate).format("MMM D, YYYY")}
-        </strong>
+        <strong>{dayjs(proof.proofDate).format("MMM D, YYYY")}</strong>
 
-        <ProofStatusBadge status={proof.status} />
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.2 }}
+        >
+          <ProofStatusBadge status={proof.status} />
+        </motion.span>
       </div>
 
       <p

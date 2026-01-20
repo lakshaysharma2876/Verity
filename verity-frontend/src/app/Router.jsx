@@ -7,6 +7,7 @@ import SubmitProof from "../pages/SubmitProof";
 import VerifyQueue from "../pages/VerifyQueue";
 import CreateCommitment from "../pages/CreateCommitment";
 import CommitmentDetail from "../pages/CommitmentDetail";
+import Reputation from "../pages/Reputation";
 
 const Router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const Router = createBrowserRouter([
       {
        path: "/commitment/:id", 
        element: <CommitmentDetail /> 
+      },
+      { 
+        path: "/reputation", 
+        element: <Reputation /> 
       },
     ],
   },

@@ -1,5 +1,6 @@
 import ProofTimelineItem from "./ProofTimelineItem";
 
+
 const ProofTimeline = ({ proofs }) => {
   if (!proofs.length) {
     return (

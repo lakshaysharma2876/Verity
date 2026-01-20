@@ -4,6 +4,9 @@ import {
   submitVerification,
 } from "../services/verification.api";
 import VerificationCard from "../components/verification/VerificationCard";
+import { motion, AnimatePresence } from "framer-motion";
+import { fadeIn } from "../styles/motion";
+
 
 const VerifyQueue = () => {
   const [queue, setQueue] = useState([]);
@@ -33,12 +36,15 @@ const VerifyQueue = () => {
   }
 
   return (
-    <main style={{ maxWidth: 720, margin: "40px auto" }}>
-      <VerificationCard
-        item={queue[0]} // ONE AT A TIME
-        onDecision={handleDecision}
-      />
-    </main>
+    <AnimatePresence mode="wait">
+  <motion.div key={queue[0].proof._id} {...fadeIn}>
+    <VerificationCard
+      item={queue[0]}
+      onDecision={handleDecision}
+    />
+  </motion.div>
+</AnimatePresence>
+
   );
 };
 
