@@ -9,5 +9,6 @@ router.post("/", protect, createCommitment);
 
 //fetch commitment
 router.get("/", protect, getMyCommitment);
+router.get("/:id", protect, getMyCommitment);
 
 export default router;

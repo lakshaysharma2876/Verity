@@ -7,9 +7,7 @@ const ProofAction = ({ commitment }) => {
     <div style={{ marginTop: 16 }}>
       <button
         onClick={() =>
-          navigate("/submit-proof", {
-            state: { commitment },
-          })
+          navigate(`/submit-proof/${commitment._id}`)
         }
       >
         Submit today’s proof

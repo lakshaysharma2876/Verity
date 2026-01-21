@@ -6,3 +6,7 @@ export const createCommitment = async (payload) => {
     body: JSON.stringify(payload),
   });
 };
+
+export const fetchCommitment = ({commitmentId}) => {
+  return apiFetch(`/commitments?commitmentId=${commitmentId}`);
+};

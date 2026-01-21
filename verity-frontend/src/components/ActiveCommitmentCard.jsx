@@ -1,11 +1,16 @@
 import dayjs from "dayjs";
 import ProofAction from "./ProofAction";
+import { useNavigate } from "react-router-dom";
+
+
 
 const ActiveCommitmentCard = ({ commitment }) => {
   const daysLeft = dayjs(commitment.endDate).diff(
     dayjs(),
     "day"
   );
+
+  const navigate = useNavigate();
 
   return (
     <section
@@ -16,16 +21,19 @@ const ActiveCommitmentCard = ({ commitment }) => {
         marginBottom: 32,
       }}
     >
-      <h3>{commitment.title}</h3>
+      <h3
+        style={{ cursor: "pointer" }}
+        onClick={() => navigate(`/commitment/${commitment._id}`)}
+      >
+        {commitment.title}
+      </h3>
 
       <p style={{ margin: "12px 0", color: "#444" }}>
         {commitment?.dailyRequirement}
       </p>
 
-      <p style={{ fontSize: 14, color: "#777" }}>
-        {daysLeft} days remaining
-      </p>
-
+      <p style={{ fontSize: 14, color: "#777" }}>{daysLeft} days remaining</p>
+      
       <ProofAction commitment={commitment} />
     </section>
   );

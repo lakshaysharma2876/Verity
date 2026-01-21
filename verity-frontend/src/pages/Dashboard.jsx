@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiFetch } from "../services/api";
 import TodayStatus from "../components/TodayStatus";
-import ActiveCommitmentCard from "../components/ActiveCommitmentCards";
+import ActiveCommitmentCard from "../components/ActiveCommitmentCard";
 import PastCommitments from "../components/PastCommitments";
 import EmptyState from "../components/EmptyState";
 
