@@ -1,6 +1,7 @@
 import { Outlet, NavLink } from "react-router-dom";
 import { useAuth } from "../../auth/AuthContext";
 
+
 const AppShell = () => {
   const { logout } = useAuth();
   return (
@@ -11,33 +12,49 @@ const AppShell = () => {
           padding: "16px 24px",
           borderBottom: "1px solid #eee",
           display: "flex",
-          justifyContent: "space-between",
+          justifyContent: "flex-end",
         }}
       >
-        <strong>Verity</strong>
-
-        <nav style={{ display: "flex", gap: 16 }}>
-          <NavLink
-            to="/"
-            style={({ isActive }) => ({
-              fontWeight: isActive ? "600" : "400",
-              opacity: isActive ? 1 : 0.7,
-            })}
+        <div
+          style={{
+            display: "flex",
+            gap: 60,
+            justifyContent: "space-around",
+          }}
+        >
+          <nav
+            style={{
+              display: "flex",
+              gap: 16,
+            }}
           >
-            Dashboard
-          </NavLink>
-          <NavLink to="/create">Commit</NavLink>
-          <NavLink to="/verify">Verify</NavLink>
-          <NavLink to="/reputation">Reputation</NavLink>
-        </nav>
+            <NavLink
+              to="/"
+              style={({ isActive }) => ({
+                fontWeight: isActive ? "600" : "400",
+                opacity: isActive ? 1 : 0.7,
+              })}
+            >
+              Dashboard
+            </NavLink>
+            <NavLink to="/create">Commit</NavLink>
+            <NavLink to="/verify">Verify</NavLink>
+            <NavLink to="/reputation">Reputation</NavLink>
+          </nav>
 
-        <button onClick={logout}>Logout</button>
+          <button onClick={logout}
+          style = {{
+            
+          }}
+          >
+            Logout</button>
+        </div>
       </header>
 
       {/* Page Content */}
-      <div style={{ padding: "24px" }}>
-  <Outlet />
-</div>
+      <div style={{  }}>
+        <Outlet />
+      </div>
     </div>
   );
 };

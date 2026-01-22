@@ -1,72 +1,102 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
+import { useError } from "../context/ErrorContext";
 
 const Login = () => {
+  const { login } = useAuth();
+  const { showError } = useError();
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  const { login } = useAuth();
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError("");
 
+    if (!email || !password) {
+      showError("Please enter email and password");
+      return;
+    }
+
+    setLoading(true);
     try {
-      await login(email, password);
-      navigate("/");
+      await login(email, password );
+      navigate(from, { replace: true });
     } catch (err) {
-      setError(err.message);
+      showError(err.message || "Login failed");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <main style={{ maxWidth: 400, margin: "80px auto", padding: 24 }}>
-      <h2 style={{ textAlign: "center", marginBottom: 32 }}>Login</h2>
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          width: 360,
+          padding: 32,
+          background: "#fff",
+          border: "1px solid #eee",
+          borderRadius: 8,
+        }}
+      >
+        <h2 style={{ marginBottom: 8 }}>Welcome back</h2>
+        <p style={{ marginBottom: 24, color: "#666" }}>
+          Log in to continue to Verity
+        </p>
 
-      <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: 16 }}>
+          <label>Email</label>
           <input
             type="email"
-            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
-            style={{ width: "100%", padding: 12, marginBottom: 12 }}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={{ width: "100%", padding: 12 }}
+            style={{ width: "100%", padding: 8, marginTop: 4 }}
           />
         </div>
 
-        {error && (
-          <p style={{ color: "red", marginBottom: 16 }}>{error}</p>
-        )}
+        <div style={{ marginBottom: 16 }}>
+          <label>Password</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={{ width: "100%", padding: 8, marginTop: 4 }}
+          />
+        </div>
 
         <button
           type="submit"
           disabled={loading}
-          style={{ width: "100%", padding: 12 }}
+          style={{
+            width: "100%",
+            padding: 10,
+            marginTop: 8,
+          }}
         >
-          {loading ? "Logging in..." : "Login"}
+          {loading ? "Logging in…" : "Login"}
         </button>
-      </form>
 
-      <p style={{ textAlign: "center", marginTop: 24 }}>
-        Don't have an account? <Link to="/register">Register</Link>
-      </p>
-    </main>
+        <p style={{ marginTop: 16, fontSize: 14 }}>
+          Don’t have an account?{" "}
+          <Link to="/register">Register</Link>
+        </p>
+      </form>
+    </div>
   );
 };
 
