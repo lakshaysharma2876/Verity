@@ -7,7 +7,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 
 import Dashboard from "../pages/Dashboard";
-import CreateCommitment from "../pages/CreateCommitment";
+import CreateCommitment from "../pages/createCommitment";
 import SubmitProof from "../pages/SubmitProof";
 import VerifyQueue from "../pages/VerifyQueue";
 import Reputation from "../pages/Reputation";
