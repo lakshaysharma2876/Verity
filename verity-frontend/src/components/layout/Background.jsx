@@ -6,7 +6,7 @@ const Background = ({ children }) => {
   return (
     <div
       style = {{
-        backgroundColor:white,
+        backgroundColor:"white",
       }}
       ></div>
   );
