@@ -1,4 +1,4 @@
-
+import Aurora from "./Aurora"
 const Background = ({ children }) => {
     
   return (
